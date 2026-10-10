@@ -1,0 +1,25 @@
+const assert=require('node:assert/strict'),{overviewMonths,dailyUsage,calendarMarkers}=require('./overview');
+assert.equal(overviewMonths(new Date(2026,8,19),'year').length,12);
+assert.deepEqual(overviewMonths(new Date(2026,8,19),'quarter').map(d=>d.getMonth()),[6,7,8]);
+const row={at:19000,primary:{usedPercent:20,windowDurationMins:300,resetsAt:36000},secondary:{usedPercent:5,windowDurationMins:10080,resetsAt:700000}};
+const markers=calendarMarkers([row,row]);assert.equal(markers.length,3);assert.ok(markers.some(m=>m.kind==='primary'&&m.at===18000));assert.ok(markers.some(m=>m.kind==='weekly'&&m.at===700000));assert.ok(markers.some(m=>m.kind==='weekly'&&m.at===95200));
+const days=dailyUsage([],[{date:'2026-09-12',active:true},{date:'2026-09-13',active:false}]);assert.equal(days.size,2);assert.equal(days.get('2026-8-12').peak,null);assert.equal(days.get('2026-8-12').windows.size,0);
+console.log('PASS: month/quarter/year boundaries, cloud activity without fabricated quota, 5h start and weekly reset markers');
+const depleted=calendarMarkers([{at:12000,primary:{usedPercent:100,resetsAt:18000,windowDurationMins:300}}]);
+assert.equal(depleted.find(m=>m.kind==='recovery').at,18000);
+assert.equal(calendarMarkers([{at:12000,primary:{usedPercent:99,resetsAt:18000,windowDurationMins:300}}]).some(m=>m.kind==='recovery'),false);
+console.log('PASS: depletion marker uses API reset timestamp, not depletion time plus duration');
+
+const {dayStatus}=require('./overview');
+const today=new Date(2026,9,10),status=(d,h=[],c=[])=>dayStatus(new Date(2026,9,d),dailyUsage(h,c),today);
+assert.equal(status(1,[],[{date:'2026-10-01',active:true}]).kind,'activity');
+assert.equal(status(2,[],[{date:'2026-10-02',active:false}]).kind,'idle');
+assert.equal(status(3,[],[{date:'2026-10-03',active:null}]).kind,'unknown');
+assert.equal(status(4).kind,'unknown');assert.equal(status(11).kind,'future');
+assert.equal(status(10,[],[{date:'2026-10-10',active:false}]).label,'暂无使用');
+const idleSample={at:new Date(2026,9,1,14).getTime()/1000,primary:{usedPercent:88,windowDurationMins:10080,resetsAt:1800000000}};
+const sampled=status(1,[idleSample],[{date:'2026-10-01',active:false}]);
+assert.equal(sampled.kind,'sampled');assert.equal(sampled.item.active,false,'sampling is not proof of consumption');
+assert.equal(sampled.item.windows.size,0,'weekly samples do not create five-hour windows');
+const unknownSource=status(1,[idleSample]);assert.equal(unknownSource.kind,'sampled');assert.notEqual(unknownSource.item.active,true);
+console.log('PASS: sampled, historical activity, explicit zero, missing/unknown, future, idle weekly snapshots');

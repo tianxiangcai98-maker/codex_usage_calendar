@@ -1,0 +1,42 @@
+# Private runtime data, credentials, and local deployment links
+/data/
+**/.vercel/
+preview-deploy.local.json
+.env
+.env.*
+!.env.example
+**/auth.json
+**/credentials.json
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite*
+*.db
+*.db-*
+*.log
+
+# Local observations and retired experiments (not open-source inputs)
+/verified-*
+/HISTORY-API-NOTES.md
+/history_import.py
+/prototype-v1.html
+/assets/*.png
+/preview/assets/*.png
+
+# Generated preview; keep only the synthetic fixture in version control
+/preview/*
+!/preview/preview-data.js
+
+# Tool and platform output
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+node_modules/
+.DS_Store
+coverage/
+dist/
+.audit/
+*.tar.gz
+*.zip

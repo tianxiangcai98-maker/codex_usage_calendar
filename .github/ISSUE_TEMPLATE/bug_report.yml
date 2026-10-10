@@ -1,0 +1,29 @@
+name: Bug report
+description: Report an issue with a sanitized reproduction.
+body:
+  - type: markdown
+    attributes:
+      value: Never attach tokens, authorization URLs, data directories, databases, or real-account screenshots. Report vulnerabilities through the Security tab.
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Prefer the synthetic preview. Include the affected view or account-window layout without personal usage values.
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: OS, browser, Python, and Codex CLI versions.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized evidence
+      description: Synthetic screenshots or a minimal fixture only.

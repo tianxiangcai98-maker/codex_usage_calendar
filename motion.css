@@ -1,0 +1,24 @@
+/* Application-owned motion and surface styles. MIT License. */
+:root{--modal-close-dur:160ms;--motion-ease:cubic-bezier(.2,.8,.2,1)}
+.t-modal{opacity:0;transform:translateY(6px) scale(.98);transition:opacity 180ms ease,transform 180ms var(--motion-ease)}
+.t-modal.is-open{opacity:1;transform:none}
+.t-modal.is-closing{opacity:0;transform:translateY(3px) scale(.99);transition-duration:var(--modal-close-dur)}
+.t-acc-head{display:flex;align-items:center;justify-content:space-between;width:100%;font-size:12px;color:#a6a2b0;padding:4px 0;text-align:left}
+.t-acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows 200ms var(--motion-ease)}
+.t-acc-panel-inner{min-height:0;overflow:hidden;opacity:0;transition:opacity 140ms ease}
+.t-acc[data-open=true] .t-acc-panel{grid-template-rows:1fr}
+.t-acc[data-open=true] .t-acc-panel-inner{opacity:1}
+.t-acc-chevron{display:inline-flex;transition:transform 180ms var(--motion-ease)}
+.t-acc-chevron svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.5}
+.t-acc[data-open=true] .t-acc-chevron{transform:rotate(180deg)}
+.t-tt{position:fixed;z-index:100;left:0;top:0;width:min(280px,calc(100vw - 16px));box-sizing:border-box;padding:9px 12px;border:1px solid #ffffff18;border-radius:9px;background:#3c3b40f7;color:#ddd9e3;box-shadow:0 6px 24px #0005;font-size:12px;line-height:1.65;white-space:normal;opacity:0;pointer-events:none;translate:var(--tt-x,0px) 0;transform:translateY(-3px);transition:opacity 120ms ease,transform 120ms var(--motion-ease)}
+.t-tt[data-show=true]{opacity:1;pointer-events:auto;transform:none}
+.t-tt-text{white-space:normal}
+.t-panel-slide{opacity:0;transform:translateY(6px);transition:opacity 160ms ease,transform 200ms var(--motion-ease)}
+.t-panel-slide[data-open=true]{opacity:1;transform:none}
+#detail[hidden]{display:none}
+.preview-note{font-size:10px;color:#beb4ce;line-height:1.5;margin:0 0 16px}
+.preview-plan{margin-bottom:18px}
+.preview-plan select{width:100%;font-size:12px}
+.window[data-selected=true] .quota-edge{stroke:#e2cffa;stroke-width:2}
+@media(prefers-reduced-motion:reduce){.t-modal,.t-acc-panel,.t-acc-panel-inner,.t-acc-chevron,.t-tt,.t-panel-slide,.meter span,.window svg{transition:none!important}}
