@@ -154,7 +154,7 @@ class Handler(BaseHTTPRequestHandler):
   if not self.allowed():return self.output(403,{'error':'Local access only'})
   if self.path=='/api/usage':return self.output(200,state())
   if self.path in {'/','/index.html'}:return self.output(200,(ROOT/'index.html').read_bytes(),'text/html; charset=utf-8')
-  if self.path in {'/quota-model.js','/usage-shape.js','/usage-estimates.js','/overview.js','/motion.js','/history-ui.js'}:return self.output(200,(ROOT/self.path[1:]).read_bytes(),'text/javascript; charset=utf-8')
+  if self.path in {'/i18n.js','/quota-model.js','/usage-shape.js','/usage-estimates.js','/overview.js','/motion.js','/history-ui.js'}:return self.output(200,(ROOT/self.path[1:]).read_bytes(),'text/javascript; charset=utf-8')
   if self.path in {'/motion.css','/history.css'}:return self.output(200,(ROOT/self.path[1:]).read_bytes(),'text/css; charset=utf-8')
   if self.path in {'/assets/info.circle.svg','/assets/chevron.left.svg','/assets/chevron.right.svg','/assets/arrow.clockwise.svg','/assets/bell.svg'}:return self.output(200,(ROOT/self.path[1:]).read_bytes(),'image/svg+xml')
   if self.path=='/favicon.ico':return self.output(204,b'','image/x-icon')

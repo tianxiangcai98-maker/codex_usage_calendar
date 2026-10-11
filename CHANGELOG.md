@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0 — 2026-10-10
+
+- Add a corner language and region menu with Chinese, English, French and Japanese.
+- Localize dates, weekday order, numbers, accessibility labels, tooltips and account flows.
+- Support independent regional formats and automatic, 12-hour or 24-hour clocks.
+- Persist display preferences locally without changing timestamps or quota calculations.
+
+
 ## 0.4.0 — 2026-10-10
 
 First public source release.

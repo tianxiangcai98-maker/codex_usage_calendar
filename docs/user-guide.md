@@ -32,3 +32,23 @@ Runway estimates use recent paired readings. They pause when evidence is insuffi
 ## Notifications
 
 When a short window has begun, the bell offers a one-time reset reminder. Permission is requested only after clicking. The reminder is scheduled in the page; it is not a background push service. Keep the tab open. Browser suspension can delay delivery, and closing the tab loses the timer. Signing out or cancelling clears the reminder. The synthetic preview never requests notification permission.
+
+## Language and regional formats
+
+Use the globe button in the bottom-right corner to open **Language & region**.
+The first release supports Simplified Chinese, English, French and Japanese.
+The initial language follows the browser's supported language preferences, falling
+back to English. Your selection is saved locally in this browser.
+
+Regional formats can follow the selected language (using a matching browser locale
+when available), or use China, the United States, the United Kingdom, France,
+French-speaking Canada or Japan. Dates, weekday names, the first day of the week,
+decimal separators and number grouping follow that region. The clock can follow
+the region or explicitly use 12-hour or 24-hour time.
+
+The settings include a format example and show the system time zone. All event and
+reset times remain in the system time zone, including daylight-saving offsets;
+changing the display format never changes timestamps or quota calculations.
+Cloud-provided historical dates remain calendar dates and are not shifted into
+another time zone. Preferences apply to both the local app and the demo, but each
+site stores its own choices. No account data is sent to a translation service.

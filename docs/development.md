@@ -27,3 +27,19 @@ Before a release, run checks from a clean checkout, inspect `git diff --cached -
 ## Source ownership
 
 UI icon SVGs and the motion styles are maintained in this project under MIT. Keep new dependencies documented in `THIRD_PARTY_NOTICES.md`. Do not copy proprietary design assets or transition-library source into the repository.
+
+## Localization
+
+`i18n.js` contains four-column source/English/French/Japanese messages, including
+accessible labels, tooltips and backend-owned errors. Parameterized messages use
+`{0}`, `{1}`, etc. The small presentation layer preserves each text node's source
+so live polling and repeated language switches remain reversible; it never
+translates HTML, input values, URLs or account payloads. Add complete messages,
+not substring replacements. Mark proper language names with `data-no-i18n`.
+
+Dates and times use `calendarI18n.locale` and `calendarI18n.timeOptions` with `Intl`.
+`calendarI18n.weekStart` determines calendar ordering, not quota reset rules.
+Test both quota layouts, all overview modes, live errors and dialogs, changing
+regions independently of language, explicit 12/24-hour time, reload persistence,
+and switching back to Chinese. `test_i18n.js` checks catalog completeness,
+placeholder parity, localized numbers and backend error coverage.

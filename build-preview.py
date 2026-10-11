@@ -15,7 +15,7 @@ s=s.replace("zoomMode='auto'","zoomMode='60'",1).replace("count===1?0:-2","count
 s=s.replace('<div class="provider">','<p class="preview-note">交互演示 · 全部为虚构数据</p><label class="control-label preview-plan"><span>演示账户</span><select class="control" id="preview-plan"><option value="prolite">Pro $100 · 仅周额度</option><option value="plus">Plus · 五小时与周额度</option></select></label><div class="provider">',1)
 s=s.replace('</body>',"<script>document.querySelector('#preview-plan').onchange=e=>{previewState=createPreviewState(previewState.asOf,e.target.value);selected=null;selectedDay=null;lastKey='';sync()};</script></body>")
 (out/'index.html').write_text(s)
-for name in ['quota-model.js','usage-shape.js','usage-estimates.js','overview.js','motion.css','motion.js','history-ui.js','history.css']:shutil.copy2(root/name,out/name)
+for name in ['i18n.js','quota-model.js','usage-shape.js','usage-estimates.js','overview.js','motion.css','motion.js','history-ui.js','history.css']:shutil.copy2(root/name,out/name)
 (out/'assets').mkdir(exist_ok=True)
 for asset in (root/'assets').glob('*.svg'):shutil.copy2(asset,out/'assets'/asset.name)
 for legacy in (out/'assets').glob('*.png'):legacy.unlink()

@@ -35,7 +35,7 @@ class LocalHttpTests(unittest.TestCase):
             connection.close()
 
     def test_public_assets_and_response_headers(self):
-        for path in ('/', '/quota-model.js', '/assets/bell.svg', '/assets/info.circle.svg'):
+        for path in ('/', '/i18n.js', '/quota-model.js', '/assets/bell.svg', '/assets/info.circle.svg'):
             status, headers, body = self.request(path)
             self.assertEqual(status, 200)
             self.assertTrue(body)

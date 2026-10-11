@@ -8,6 +8,7 @@
 | Daily activity dates and yes/no/unknown state | Same database | Daily token counts discarded |
 | Account partition key | Same database | SHA-256 of normalized email; not anonymous |
 | Managed login credentials and runtime-owned files | `data/codex-home/` | Owned by the official Codex runtime |
+| Language, region and clock preferences | Browser local storage | Display-only; cleared with site data; never sent to a translation service |
 | Pending reminder timestamp | Browser session storage | Cleared on cancellation/sign-out; no hosted scheduler |
 
 The app requests private directory permissions (0700) and database permissions (0600). Storage is not encrypted by this application. Other software running as the same operating-system user may still read it. Disk encryption and local account protection remain the user's responsibility.
